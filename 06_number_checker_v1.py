@@ -15,3 +15,11 @@ def temp_check(low):
 
         except ValueError:
             print("Please enter a number")
+
+# Main Routine
+# Run this code twice (for two valid repsonses in the test plan)
+number = temp_check(-273)
+print("You chose {}". format(number))
+
+number = temp_check(-459)
+print("You chose {}".format(number))
