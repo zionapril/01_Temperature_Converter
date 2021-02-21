@@ -1,18 +1,25 @@
 from tkinter import *
-from functools import partial   # To prevent unwanted windows
+from functools import partial  # To prevent unwanted windows
+
 import random
 
 
 class Converter:
     def __init__(self):
 
-        # Formatting variables
+        # Formatting variables...
         background_colour = "light blue"
 
-        # Initialise list to hold calculation history
-        self.all_calculations = []
+        # In actual program this is blank and is populated with user calculations
+        self.all_calc_list = ['0 degrees C is -17.8 degrees F',
+                              '0 degrees C is 32 degrees F',
+                              '40 degrees C is 104 degrees F',
+                              '40 degrees C is 4.4 degrres F'
+                              '12 degrees C is 53.6 degrees F'
+                              '24 degrees C is 75.2 degrees F'
+                              '100 degrees C is 37.8 degrees F']
 
-        # Converter Frame
+# Converter Frame
         self.converter_frame = Frame(bg=background_colour,
                                      pady=10)
         self.converter_frame.grid()
@@ -114,13 +121,13 @@ class Converter:
 
             # Add Answer to list for History
             if answer != "Too Cold":
-                self.all_calculations.append(answer)
-                print(self.all_calculations)
+                self.all_calc_list.append(answer)
+                print(self.all_calc_list)
 
         except ValueError:
             self.converted_label.configure(text="Enter a number!!", fg="red")
             self.to_convert_entry.configure(bg=error)
-            answer = "Please senter a number"
+            answer = "Please enter a number"
 
         print(answer)
 
