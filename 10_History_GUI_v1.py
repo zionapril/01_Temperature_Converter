@@ -3,7 +3,7 @@ from functools import partial   # To prevent unwanted windows
 import random
 
 
-class history:
+class History:
     def __init__(self, partner):
 
         background = "#a9ef99"    # Pale green
@@ -16,7 +16,6 @@ class history:
 
         # If users press cross at top, closes history and 'releases' history button
         self.history_box.protocol('WM_DELETE-WINDOW', partial(self.close_history,))
-
 
         # Set up GUI Frame
         self.history_frame = Frame(self.history_box, width=300, bg=background)
@@ -55,7 +54,6 @@ class history:
                                      font="Arial 12 bold", command=partial(self.close_history(partner)))
         self.dismiss_button.grid(row=0, column=1)
 
-
     def close_history(self, partner):
         # Put history button back to normal...
         partner.history_button.config(state=NORMAL)
@@ -66,5 +64,5 @@ class history:
 if __name__ == "__main__":
     root = Tk()
     root.title("Temperature Converter")
-    something = history()
+    something = History(root)
     root.mainloop()
