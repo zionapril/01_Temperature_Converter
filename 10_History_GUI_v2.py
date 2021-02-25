@@ -14,9 +14,8 @@ class Converter:
         self.all_calc_list = ['0 degrees C is -17.8 degrees F',
                               '0 degrees C is 32 degrees F',
                               '40 degrees C is 104 degrees F',
-                              '40 degrees C is 4.4 degrees F'
-                              '12 degrees C is 53.6 degrees F'
-                              '24 degrees C is 75.2 degrees F'
+
+                              '24 degrees C is 75.2 degrees F',
                               '100 degrees C is 37.8 degrees F']
 
         # Converter Main Screen GUI...
@@ -81,11 +80,23 @@ class History:
 
         # Generate string from list of calculations...
         history_string = ""
+        print("Calc history", calc_history)
 
         if len(calc_history) >= 7:
+            # show seven most recent calculations
             for item in range(0, 7):
                 history_string += calc_history[len(calc_history)
                                                 - item - 1]+"\n"
+        else:
+            for item in calc_history:
+                history_string += calc_history[len(calc_history) -
+                                               calc_history.index(item) - 1] + "\n"
+                self.history_text.config(text="Here is your calculation"
+                                              " history. You can use the"
+                                              " export button to save this"
+                                              " data to a text file if "
+                                              "desired.")
+
         # Label to display calculation history to user
         self.calc_label = Label(self.history_frame, text=history_string,
                                 bg=background,font="Arial 12", justify=LEFT)
@@ -100,10 +111,10 @@ class History:
         self.export_button.grid(row=0, column=0)
 
         # Dismiss button (row 2)
-        self.dismiss_btn = Button(self.history_frame, text="Dismiss",
+        self.dismiss_btn = Button(self.export_dismiss_frame, text="Dismiss",
                                   width=10, font="arial 10 bold",
                                 command=partial(self.close_history, partner))
-        self.dismiss_btn.grid(row=2, pady=10)
+        self.dismiss_btn.grid(row=0, column=1)
 
     def close_history(self, partner):
         # Put history button back ro normal...
