@@ -1,5 +1,6 @@
 from tkinter import *
-from functools import partial  # To prevent unwanted windows
+from functools import partial # To prevent unwanted windows
+import re
 
 import random
 
@@ -118,7 +119,7 @@ class Converter:
                 self.to_convert_entry.configure(bg=error)
 
             # Add Answer to list for History
-            if answer != "Too Cold":
+            if has_errors != "yes":
                 self.all_calc_list.append(answer)
                 self.history_button.config(state=NORMAL)
 
@@ -220,4 +221,12 @@ class History:
         # Put history button back ro normal...
         partner.history_button.config(state=NORMAL)
         self.history_box.destroy()
+
+
+# main routine
+if __name__ == "__main__":
+    root = Tk()
+    root.title("Temperature Converter")
+    something = Converter()
+    root.mainloop()
 
