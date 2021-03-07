@@ -89,7 +89,7 @@ class Converter:
 
         try:
             to_convert = float(to_convert)
-            has_errors ="no"
+            has_errors = "no"
 
             # Check and convert to Fahrenheit
             if low == -273 and to_convert >= low:
@@ -221,6 +221,73 @@ class History:
         # Put history button back ro normal...
         partner.history_button.config(state=NORMAL)
         self.history_box.destroy()
+
+
+class Export:
+    def __init__(self, partner):
+        background = "#a9ef99"  # Pale Green
+
+        # disable export button
+        partner.export_button.config(state=DISABLED)
+
+        # Sets up child window (ie: export box)
+        self.export_box = Toplevel()
+
+        # If users press cross at top, closes export and 'releases' export button
+        self.export_box.protocol('WM_DELETE_WINDOW', partial(self.close_export, partner))
+
+        # Set up GUI Frame
+        self.export_frame = Frame(self.export_box, width=300, bg=background)
+        self.export_frame.grid()
+
+        # Set up export heading (row 0)
+        self.how_heading = Label(self.export_frame, text="export / Instructions",
+                                 font="arial 10 bold", bg=background)
+        self.how_heading.grid(row=0)
+
+        # Export Instructions (label, row 1)
+        self.export_text = Label(self.export_frame, text="Enter a filename "
+                                                         "in the box below "
+                                                         "and press the Save "
+                                                         "button to save your "
+                                                         "calculation history "
+                                                         "to a text file.",
+                                 justify=LEFT, width=40, bg=background, wrap=250)
+        self.export_text.grid(row=1)
+
+        # Warning Text (row 2)
+        self.export_text = Button(self.export_frame, text="If the filename "
+                                                          "you enter below "
+                                                          "already exists "
+                                                          "its contents will "
+                                                          "be replaced with "
+                                                          "your calculation "
+                                                          "history",
+                                  justify=LEFT, width=10, bg="#ffafaf", fg="maroon", font="arial 10 italic",
+                                  wrap=225, padx=70, pady=10)
+        self.export_text.grid(row=2, pady=10)
+
+        # Filename Entry Box (row 3)
+        self.filename_entry = Entry(self.export_frame, width=20, font="Arial 10 bold",
+                                    justify=CENTER)
+        self.filename_entry.grid(row=3, pady=10)
+
+        # Save / Cancel Frame (row 4)
+        self.save_cancel_frame = Frame(self.export_frame)
+        self.save_cancel_frame.grid(row=5, pady=10)
+
+        # Save and Cancel Buttons (row 0 of save_cancel_frame)
+        self.save_button = Button(self.save_cancel_frame, text="Save")
+        self.save_button.grid(row=0, column=0)
+
+        self.cancel_button = Button(self.save_cancel_frame, text="Cancel",
+                                    command=partial(self.close_export, partner))
+        self.cancel_button.grid(row=0, column=1)
+
+    def close_export(self, partner):
+        # Put export button back ro normal...
+        partner.export_button.config(state=NORMAL)
+        self.export_box.destroy()
 
 
 # main routine
