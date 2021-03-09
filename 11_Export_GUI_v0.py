@@ -62,19 +62,20 @@ class Export:
                                                          "button to save your "
                                                          "calculation history "
                                                          "to a text file.",
-                                 justify=LEFT, width=40, bg=background, wrap=250)
+                                 justify=LEFT, width=40,
+                                    bg=background, wrap=250)
         self.export_text.grid(row=1)
 
         # Warning Text (row 2)
-        self.export_text = Button(self.export_frame, text="If the filename "
-                                                          "you enter below "
-                                                          "already exists "
-                                                          "its contents will "
-                                                          "be replaced with "
-                                                          "your calculation "
-                                                          "history",
-                                  justify=LEFT,width=10, bg="#ffafaf", fg="maroon", font="arial 10 italic",
-                                  wrap=225, padx=70, pady=10)
+        self.export_text = Label(self.export_frame, text="If the filename "
+                                                         "you enter below "
+                                                         "already exists "
+                                                         "its contents will "
+                                                         "be replaced with "
+                                                         "your calculation "
+                                                         "history",
+                                 justify=LEFT,width=10, bg="#ffafaf", fg="maroon", font="arial 10 italic",
+                                 wrap=225, padx=70, pady=10)
         self.export_text.grid(row=2, pady=10)
 
         # Filename Entry Box (row 3)
